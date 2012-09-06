@@ -29,8 +29,13 @@ begin
 	puts "Starting le grand Twitter unfollowing"
 	Twitter.friend_ids.each do |id|
 		begin
-			break if rate_limit_status.remaining_hits == 0
-			unfollowed_user = Twitter.unfollow(x)
+			
+			if rate_limit_status.remaining_hits == 0
+				puts "Reached API request limit. Going to sleep for #{((rate_limit_status.reset_time - Time.now) / 60).floor + 1.0}. You can stop this script at any time and resume later."
+				sleep(((rate_limit_status.reset_time - Time.now) / 60).floor + 1.0) 
+			end
+
+			unfollowed_user = Twitter.unfollow(id)
 			following -= 1
 			puts "Just unfollowed #{unfollowed_user.first.screen_name} (#{unfollowed_user.first.name}). #{following} left." if following > 0
 			STDOUT.flush
