@@ -50,6 +50,9 @@ begin
 	else
 		puts "You're still following #{following} users. The API will reset in #{((rate_limit_status.reset_time - Time.now) / 60).floor} minutes and #{((rate_limit_status.reset_time - Time.now) % 60).round} seconds"
 	end
+
+	file.close
+
 rescue => e
   p e.message
   p e.backtrace
