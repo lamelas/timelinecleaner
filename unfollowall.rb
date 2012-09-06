@@ -9,6 +9,10 @@ begin
 	  config.consumer_secret = "R02nNPdTl5HnFnc4jgBW6yFcglKgNAqT6meUBOKcvCc"
 	  config.oauth_token = "8318992-PZwXT7gOaP1jEptebeqXjh0StGOP1FJloxuKQOgjs"
 	  config.oauth_token_secret = "B0Fdz1HwvmyATHmqMT0Xf5vgYGlcjMwwi9VL4CyQ"
+	  config.consumer_key = "" # place your consumer key 
+	  config.consumer_secret = "" # place your consumer secret 
+	  config.oauth_token = "" # place oauth token 
+	  config.oauth_token_secret = "" # place oauth token secret
 	end
 
 	puts "Backing up the users you follow. Just in case..."
