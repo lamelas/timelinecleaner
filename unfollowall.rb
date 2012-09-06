@@ -12,10 +12,12 @@ begin
 	end
 
 	puts "Backing up the users you follow. Just in case..."
-	file = File.open(backup_filename, "a")
-	Twitter.friend_ids.each do |id|
-		file.write("#{id}\n")
+	File.open(backup_filename, "a") do |file|
+		Twitter.friend_ids.each do |id|
+			file.write("#{id}\n")
+		end
 	end
+	
 
 	puts "The IDs for all the users you follow where backed up to the file #{backup_filename}"
 
@@ -50,8 +52,6 @@ begin
 	else
 		puts "You're still following #{following} users. The API will reset in #{((rate_limit_status.reset_time - Time.now) / 60).floor} minutes and #{((rate_limit_status.reset_time - Time.now) % 60).round} seconds"
 	end
-
-	file.close
 
 rescue => e
   p e.message
