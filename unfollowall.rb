@@ -20,6 +20,10 @@ begin
 	Twitter.friend_ids.each{|x|
 		file.write("#{x}\n")
 	}
+	Twitter.friend_ids.each do |id|
+		file.write("#{id}\n")
+	end
+
 	puts "The IDs for all the users you follow where backed up to the file #{backup_filename}"
 
 	following = Twitter.friend_ids.all.length
@@ -31,6 +35,7 @@ begin
 
 	puts "Starting le grand Twitter unfollowing"
 	Twitter.friend_ids.each{|x|
+	Twitter.friend_ids.each do |id|
 		begin
 			break if rate_limit_status.remaining_hits == 0
 			unfollowed_user = Twitter.unfollow(x)
@@ -40,8 +45,10 @@ begin
 			sleep(1.5)
 		rescue Exception => e
 			puts "An error ocurred when trying to unfollow user with ID #{x}"
+			puts "An error ocurred when trying to unfollow user with ID #{id}"
 		end
 	}
+	end
 
 	if following == 0
 		puts "FREE AT LAST!"
